@@ -1,4 +1,5 @@
 import requests
+import time
 
 
 def get_iss_location():
@@ -32,16 +33,18 @@ def calculate_distance(lat1, lon1, lat2, lon2):
     r = 6371  # this has been found on stackoverflow. Not the radius of the earth but the formula execution. https://stackoverflow.com/questions/4913349/haversine-formula-in-python-bearing-and-distance-between-two-gps-points
     return c * r
 
-user_lat, user_lon = get_user_location()  # Call get user location function
-iss_lat, iss_lon = get_iss_location()  # call Iss location function and assign both to their variables
+while True: 
+    user_lat, user_lon = get_user_location()  # Call get user location function
+    iss_lat, iss_lon = get_iss_location()  # call Iss location function and assign both to their variables
 
-distance = calculate_distance(user_lat, user_lon, iss_lat, iss_lon)  # distance calculation
+    distance = calculate_distance(user_lat, user_lon, iss_lat, iss_lon)  # distance calculation
 
 
-# All the output stuff:
-print(f"I am at {user_lat}, {user_lon}")
-print(f"ISS is at {iss_lat}, {iss_lon}")
-print(f"distance is {distance:.2f}km ")
+    # All the output stuff:
+    print(f"I am at {user_lat}, {user_lon}")
+    print(f"ISS is at {iss_lat}, {iss_lon}")
+    print(f"distance is {distance:.2f}km ")
 
-if distance < 500:
-    print("ISS is within 500 km")
+    if distance < 500:
+        print("ISS is within 500 km")
+    time.sleep(15)
